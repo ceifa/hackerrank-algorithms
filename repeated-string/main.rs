@@ -8,19 +8,14 @@ fn main() {
 }
 
 fn repeated_string(s: &str, n: &usize) -> usize {
-    /*
-        [[ EASY WAY BELOW, NOT PERFORMANT ]]
+    let length = s.len();
+    let enabled_flags = s.chars().filter(|&c| c == 'a').count();
 
-        let repeated = s.repeat(n / s.len() + 1);
-        let sliced = &repeated[repeated.len() % n..];
+    let repetitions = n / length;
+    let excess = n % length;
+    let result = s.chars().take(excess).filter(|c| *c == 'a').count();
 
-        return sliced.chars().filter(|&c| c == 'a').count();
-    */
-    let flags = s.chars().map(|c| c == 'a');
-    let enabledFlags = flags.filter(|&f| f).count();
-    let length = flags.count();
-    let total = (n / length + 1) * length;
-    return 1;
+    return result + repetitions * enabled_flags;
 }
 
 fn readline() -> String {
